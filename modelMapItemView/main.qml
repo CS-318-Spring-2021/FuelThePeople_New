@@ -15,6 +15,21 @@ Map{
     center: QtPositioning.coordinate(40.66062, -73.95043)
     zoomLevel: 8
 
+    Slider {
+            id: zoomSlider;
+            z: map_map.z + 3
+            minimumValue: map_map.minimumZoomLevel;
+            maximumValue: map_map.maximumZoomLevel;
+            anchors.margins: 10
+            anchors.bottom: scale.top
+            anchors.top: parent.top
+            anchors.right: parent.right
+            orientation : Qt.Vertical
+            value: map_map.zoomLevel
+            onValueChanged: {
+                map_map.zoomLevel = value
+            }
+
     MapItemView{
         model: circle_model
         delegate:  MapQuickItem {
