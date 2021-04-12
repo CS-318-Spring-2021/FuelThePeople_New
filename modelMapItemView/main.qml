@@ -17,9 +17,9 @@ Map{
 
     Slider {
             id: zoomSlider;
-            z: map_map.z + 3
-            minimumValue: map_map.minimumZoomLevel;
-            maximumValue: map_map.maximumZoomLevel;
+            z: map_map.z + 3;
+            from: map_map.minimumZoomLevel;
+            to: map_map.maximumZoomLevel;
             anchors.margins: 10
             anchors.bottom: scale.top
             anchors.top: parent.top
@@ -29,6 +29,8 @@ Map{
             onValueChanged: {
                 map_map.zoomLevel = value
             }
+    }
+
 
     MapItemView{
         model: circle_model
@@ -64,3 +66,4 @@ Map{
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     }
 }
+
