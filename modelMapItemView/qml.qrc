@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>menu/MainMenu.qml</file>
+        <file>menu/SearchBar.qml</file>
     </qresource>
 </RCC>

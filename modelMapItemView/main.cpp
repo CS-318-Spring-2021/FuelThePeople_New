@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
         view.resize(1000, 650);
         view.show();
         QString data;
+
         QFile importedCSV("/users/simonmscharf/Downloads/csvTest 2.csv");
         QStringList rowOfData;
         QStringList rowData;

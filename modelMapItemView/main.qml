@@ -16,11 +16,15 @@ Map{
     center: QtPositioning.coordinate(40.66062, -73.95043)
     zoomLevel: 8
 
+    function changeLocation(text) {
+        map_map.center = QtPositioning.coordinate(-33.8688, 151.2093);
+    }
+
     Slider {
             id: zoomSlider;
             z: map_map.z + 3
-            to: map_map.minimumZoomLevel;
-            from: map_map.maximumZoomLevel;
+            to: map_map.maximumZoomLevel;
+            from: map_map.minimumZoomLevel;
             anchors.margins: 10
             anchors.bottom: scale.top
             anchors.top: parent.top
@@ -30,35 +34,6 @@ Map{
             onValueChanged: {
                 map_map.zoomLevel = value
             }
-    }
-
-    MainMenu{
-        id: mainMenu
-//        onSelectTool: {
-//            switch(tool) {
-//            case "Geocode":
-//                stackView.pop({item:page, immediate: true})
-//                stackView.push({ item: Qt.resolvedUrl("forms/Geocode.qml") ,
-//                                   properties: { "address": fromAddress}})
-//                stackView.currentItem.showPlace.connect(map.geocode)
-//                stackView.currentItem.closeForm.connect(stackView.closeForm)
-//                break
-//            }
-//        }
-
-    }
-
-    GeocodeModel{
-        id: geocodeModel
-        plugin: map_map.plugin
-        query: "Sandakerveien 116, Oslo"
-        onLocationsChanged: {
-            if (count > 0) {
-                test_map_point.coordinate = get(0).coordinate
-                map_map.center = get(0).coordinate
-            }
-        }
-        Component.onCompleted: update()
     }
 
     MapItemView{
@@ -93,5 +68,14 @@ Map{
         modal: true
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    }
+
+    SearchBar {
+        id: searchBar
+        onGoLocation: {
+            if (location.length > 0)
+                map_map.changeLocation(location);
+        }
+
     }
 }
