@@ -13,7 +13,7 @@ ToolBar {
 
         TextField {
             id: searchText
-            placeholderText:  qsTr("Type place...")
+            placeholderText: qsTr("Type place...")
             onAccepted: goLocation(searchText.text)
 
         }

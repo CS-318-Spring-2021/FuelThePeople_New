@@ -17,7 +17,9 @@ Map{
     zoomLevel: 8
 
     function changeLocation(text) {
-        map_map.center = QtPositioning.coordinate(-33.8688, 151.2093);
+        geocodeModel.query = text
+        geocodeModel.update()
+        console.info("location update")
     }
 
     Slider {
@@ -68,6 +70,22 @@ Map{
         modal: true
         focus: true
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    }
+
+    GeocodeModel {
+        id: geocodeModel
+        plugin: map_map.plugin
+        autoUpdate: false
+
+        onLocationsChanged: {
+            if (count != 0) {
+                console.info("location changed")
+                console.info(count)
+                map_map.center.latitude = get(0).coordinate.latitude
+                map_map.center.longitude = get(0).coordinate.longitude
+                map_map.zoomLevel = 14
+            }
+        }
     }
 
     SearchBar {
