@@ -2,15 +2,16 @@ import QtQuick 2.14
 import QtPositioning 5.14
 import QtLocation 5.14
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.0 // or import Qt.labs.controls 1.0
+import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
+import "menu"
 
 Map{
     id: map_map
     anchors.centerIn: parent;
     anchors.fill: parent
     plugin: Plugin {
-        name: "mapboxgl" // "osm", "esri", ...
-        PluginParameter {name: "mapboxgl.access_token"; value: 'pk.eyJ1IjoiYWxhbmRhdXgiLCJhIjoiY2trNGVnenhiMHJsaTJwcXh1a3Y0N2piNyJ9.AanJ6dhSwkSJW3-Ae_Gdzw'}
+        name: "osm" // "osm", "esri", ...
+//        PluginParameter {name: "mapboxgl.access_token"; value: 'pk.eyJ1IjoiYWxhbmRhdXgiLCJhIjoiY2trNGVnenhiMHJsaTJwcXh1a3Y0N2piNyJ9.AanJ6dhSwkSJW3-Ae_Gdzw'}
     }
     center: QtPositioning.coordinate(40.66062, -73.95043)
     zoomLevel: 8
@@ -18,8 +19,8 @@ Map{
     Slider {
             id: zoomSlider;
             z: map_map.z + 3
-            minimumValue: map_map.minimumZoomLevel;
-            maximumValue: map_map.maximumZoomLevel;
+            to: map_map.minimumZoomLevel;
+            from: map_map.maximumZoomLevel;
             anchors.margins: 10
             anchors.bottom: scale.top
             anchors.top: parent.top
@@ -29,6 +30,36 @@ Map{
             onValueChanged: {
                 map_map.zoomLevel = value
             }
+    }
+
+    MainMenu{
+        id: mainMenu
+//        onSelectTool: {
+//            switch(tool) {
+//            case "Geocode":
+//                stackView.pop({item:page, immediate: true})
+//                stackView.push({ item: Qt.resolvedUrl("forms/Geocode.qml") ,
+//                                   properties: { "address": fromAddress}})
+//                stackView.currentItem.showPlace.connect(map.geocode)
+//                stackView.currentItem.closeForm.connect(stackView.closeForm)
+//                break
+//            }
+//        }
+
+    }
+
+    GeocodeModel{
+        id: geocodeModel
+        plugin: map_map.plugin
+        query: "Sandakerveien 116, Oslo"
+        onLocationsChanged: {
+            if (count > 0) {
+                test_map_point.coordinate = get(0).coordinate
+                map_map.center = get(0).coordinate
+            }
+        }
+        Component.onCompleted: update()
+    }
 
     MapItemView{
         model: circle_model
