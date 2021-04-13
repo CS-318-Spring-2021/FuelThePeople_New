@@ -10,8 +10,8 @@ Map{
     anchors.centerIn: parent;
     anchors.fill: parent
     plugin: Plugin {
-        name: "osm" // "osm", "esri", ...
-//        PluginParameter {name: "mapboxgl.access_token"; value: 'pk.eyJ1IjoiYWxhbmRhdXgiLCJhIjoiY2trNGVnenhiMHJsaTJwcXh1a3Y0N2piNyJ9.AanJ6dhSwkSJW3-Ae_Gdzw'}
+        name: "mapboxgl" // "osm", "esri", ...
+        PluginParameter {name: "mapboxgl.access_token"; value: 'pk.eyJ1IjoiYWxhbmRhdXgiLCJhIjoiY2trNGVnenhiMHJsaTJwcXh1a3Y0N2piNyJ9.AanJ6dhSwkSJW3-Ae_Gdzw'}
     }
     center: QtPositioning.coordinate(40.66062, -73.95043)
     zoomLevel: 8
@@ -74,7 +74,8 @@ Map{
 
     GeocodeModel {
         id: geocodeModel
-        plugin: map_map.plugin
+        plugin: Plugin {
+            name: 'osm'}
         autoUpdate: false
 
         onLocationsChanged: {
