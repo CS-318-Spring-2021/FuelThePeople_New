@@ -4,6 +4,7 @@ import QtLocation 5.14
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0 // or import Qt.labs.controls 1.0
 
+
 Map{
     id: map_map
     anchors.centerIn: parent;
@@ -16,19 +17,19 @@ Map{
     zoomLevel: 8
 
     Slider {
-            id: zoomSlider;
-            z: map_map.z + 3;
-            from: map_map.minimumZoomLevel;
-            to: map_map.maximumZoomLevel;
-            anchors.margins: 10
-            anchors.bottom: scale.top
-            anchors.top: parent.top
-            anchors.right: parent.right
-            orientation : Qt.Vertical
-            value: map_map.zoomLevel
-            onValueChanged: {
-                map_map.zoomLevel = value
-            }
+        id: zoomSlider;
+        z: map_map.z + 3;
+        from: map_map.minimumZoomLevel;
+        to: map_map.maximumZoomLevel;
+        anchors.margins: 10
+        anchors.bottom: scale.top
+        anchors.top: parent.top
+        anchors.right: parent.right
+        orientation : Qt.Vertical
+        value: map_map.zoomLevel
+        onValueChanged: {
+            map_map.zoomLevel = value
+        }
     }
 
 
@@ -44,7 +45,8 @@ Map{
                     onExited: {parent.color = 'red' }
                     onClicked: { popup.open() }
 
-                }}
+                }
+            }
             coordinate: {
                 model.coordinate
             }
@@ -53,6 +55,14 @@ Map{
 
         }
     }
+
+    SideBar {
+        id: info_bar
+        z: map.z + 3
+        mapSource: map
+        edge: Qt.LeftEdge
+    }
+
 
     Popup {
         id: popup
