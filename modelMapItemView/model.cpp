@@ -60,3 +60,4 @@ void model::readCSV(const QString filePath, const QStandardItemModel itemModel) 
         }
 
 }
+
