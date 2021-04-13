@@ -55,7 +55,7 @@ void model::readCSV(const QString filePath, const QStandardItemModel itemModel) 
         longitude= rowData[1].toDouble();
         QStandardItem *item = new QStandardItem;
         item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), model::Coordinates());
-        itemModel.appendRow(item);
+        //itemModel.appendRow(item);
 
         }
 
