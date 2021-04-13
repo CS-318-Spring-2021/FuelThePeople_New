@@ -43,7 +43,7 @@ Map{
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = 'red' }
-                    onClicked: { popup.open() }
+                    onClicked: { info_bar.expanded = !info_bar.expanded}
 
                 }
             }
@@ -58,9 +58,8 @@ Map{
 
     SideBar {
         id: info_bar
-        z: map.z + 3
-        mapSource: map
-        edge: Qt.LeftEdge
+        expanded: false
+        mapSource: map_map
     }
 
 

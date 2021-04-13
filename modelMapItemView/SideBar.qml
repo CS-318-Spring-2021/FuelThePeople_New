@@ -8,9 +8,8 @@ Row {
 
     property var mapSource
     property real fontSize : 14
-    property color labelBackground : "transparent"
-    property int edge: Qt.RightEdge
-    property alias expanded: sliderToggler.checked
+    property int edge: Qt.LeftEdge
+    property alias expanded: sideBarToggler.checked
 
     function rightEdge() {
         return (containerRow.edge === Qt.RightEdge);
@@ -27,15 +26,14 @@ Row {
 
     // This is the arrow to close and open window
     Button {
-        id: sliderToggler
+        id: sideBarToggler
         width: 32
         height: 96
         checkable: true
-        checked: true
         anchors.verticalCenter: parent.verticalCenter
 
         transform:  Scale {
-            origin.x: rightEdge() ? 0 : sliderToggler.width / 2
+            origin.x: rightEdge() ? 0 : sideBarToggler.width / 2
             xScale: rightEdge() ? 1 : -1
         }
         // @disable-check M16
@@ -53,12 +51,12 @@ Row {
             height: 48
             color: "seagreen"
             antialiasing: true
-            opacity: sliderToggler.buttonOpacity
+            opacity: sideBarToggler.buttonOpacity
             anchors.top: parent.top
-            anchors.left: sliderToggler.checked ?  parent.left : parent.horizontalCenter
+            anchors.left: sideBarToggler.checked ?  parent.left : parent.horizontalCenter
             transform: Matrix4x4 {
-                property real d : sliderToggler.checked ? 1.0 : -1.0
-                matrix:    Qt.matrix4x4(1.0,  d * sliderToggler.shear,    0.0,    0.0,
+                property real d : sideBarToggler.checked ? 1.0 : -1.0
+                matrix:    Qt.matrix4x4(1.0,  d * sideBarToggler.shear,    0.0,    0.0,
                                         0.0,    1.0,    0.0,    0.0,
                                         0.0,    0.0,    1.0,    0.0,
                                         0.0,    0.0,    0.0,    1.0)
@@ -69,12 +67,12 @@ Row {
             height: 48
             color: "seagreen"
             antialiasing: true
-            opacity: sliderToggler.buttonOpacity
+            opacity: sideBarToggler.buttonOpacity
             anchors.top: parent.verticalCenter
-            anchors.right: sliderToggler.checked ?  parent.right : parent.horizontalCenter
+            anchors.right: sideBarToggler.checked ?  parent.right : parent.horizontalCenter
             transform: Matrix4x4 {
-                property real d : sliderToggler.checked ? -1.0 : 1.0
-                matrix:    Qt.matrix4x4(1.0,  d * sliderToggler.shear,    0.0,    0.0,
+                property real d : sideBarToggler.checked ? -1.0 : 1.0
+                matrix:    Qt.matrix4x4(1.0,  d * sideBarToggler.shear,    0.0,    0.0,
                                         0.0,    1.0,    0.0,    0.0,
                                         0.0,    0.0,    1.0,    0.0,
                                         0.0,    0.0,    0.0,    1.0)
@@ -84,37 +82,27 @@ Row {
 
 
 
-
-    // These are the labels for each slider
     Rectangle {
         id: info_container
         height: parent.height
-//        width: sliderRow.width + 100
-//        eventually we will want to scale the width to what it is containing
-        width: 200
-        visible: sliderToggler.checked
+        width: parent.parent.width * 0.2
+        visible: sideBarToggler.checked
         // color: Qt.rgba( 0, 191 / 255.0, 255 / 255.0, 0.07)
         // the above color is if we want slightly transparent, green background
         color: "white"
 
-        property var labelBorderColor: "transparent"
-        property var slidersHeight : sliderContainer.height
-                                     - rowSliderValues.height
-                                     - rowSliderLabels.height
-                                     - sliderColumn.spacing * 2
-                                     - sliderColumn.topPadding
-                                     - sliderColumn.bottomPadding
         Column {
             id: textColumn
             spacing: 10
             topPadding: 16
             bottomPadding: 48
-            anchors.centerIn: parents
+            anchors.horizontalCenter: parent.horizontalCenter
             Text {
                 id: random_text
+                font.pointSize: fontSize
                 text: qsTr("This is random text")
             }
         }
     }
-} // overall containerRow
+}
 
