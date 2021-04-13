@@ -1,7 +1,10 @@
 #include "model.h"
-#include <QStandardItemModel>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 #include <QQuickView>
 #include <QGeoCoordinate>
+#include <QQmlContext>
+#include <QStandardItemModel>
 
 model::model()
 {
@@ -23,9 +26,10 @@ void model::createModel(const QString modelName) {
     view.setSource(QUrl("qrc:/main.qml"));
     view.resize(1000, 650);
     view.show();
+
 }
 
-void model::readCSV(const QString filePath, const model itemModel) {
+void model::readCSV(const QString filePath, const QStandardItemModel itemModel) {
     QString data;
     QFile importedCSV(filePath);
     QStringList rowOfData;
