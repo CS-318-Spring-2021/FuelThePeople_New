@@ -2,7 +2,8 @@ import QtQuick 2.14
 import QtPositioning 5.14
 import QtLocation 5.14
 import QtQuick.Window 2.2
-import QtQuick.Controls 2.0 // or import Qt.labs.controls 1.0
+import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
+import "menu"
 
 
 Map{
@@ -16,22 +17,27 @@ Map{
     center: QtPositioning.coordinate(40.66062, -73.95043)
     zoomLevel: 8
 
-    Slider {
-        id: zoomSlider;
-        z: map_map.z + 3;
-        from: map_map.minimumZoomLevel;
-        to: map_map.maximumZoomLevel;
-        anchors.margins: 10
-        anchors.bottom: scale.top
-        anchors.top: parent.top
-        anchors.right: parent.right
-        orientation : Qt.Vertical
-        value: map_map.zoomLevel
-        onValueChanged: {
-            map_map.zoomLevel = value
-        }
+    function changeLocation(text) {
+        geocodeModel.query = text
+        geocodeModel.update()
+        console.info("location update")
     }
 
+    Slider {
+            id: zoomSlider;
+            z: map_map.z + 3
+            to: map_map.maximumZoomLevel;
+            from: map_map.minimumZoomLevel;
+            anchors.margins: 10
+            anchors.bottom: scale.top
+            anchors.top: parent.top
+            anchors.right: parent.right
+            orientation : Qt.Vertical
+            value: map_map.zoomLevel
+            onValueChanged: {
+                map_map.zoomLevel = value
+            }
+    }
 
     MapItemView{
         model: circle_model
@@ -62,6 +68,30 @@ Map{
         mapSource: map_map
     }
 
+    GeocodeModel {
+        id: geocodeModel
+        plugin: Plugin {
+            name: 'osm'}
+        autoUpdate: false
 
+        onLocationsChanged: {
+            if (count != 0) {
+                console.info("location changed")
+                console.info(count)
+                map_map.center.latitude = get(0).coordinate.latitude
+                map_map.center.longitude = get(0).coordinate.longitude
+                map_map.zoomLevel = 14
+            }
+        }
+    }
+
+    SearchBar {
+        id: searchBar
+        onGoLocation: {
+            if (location.length > 0)
+                map_map.changeLocation(location);
+        }
+
+    }
 }
 

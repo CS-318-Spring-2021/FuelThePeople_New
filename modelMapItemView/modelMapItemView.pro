@@ -24,5 +24,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 QT += positioning
 
+DISTFILES += \
+    menu/MainMenu.qml
+
 HEADERS += \
     model.h

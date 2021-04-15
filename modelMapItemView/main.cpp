@@ -16,23 +16,24 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQuickView view;
-    QStandardItemModel model;
-    QHash<int, QByteArray> roles;
-    roles[CoordinateRole] = QByteArray("coordinate");
-    model.setItemRoleNames(roles);
-    view.rootContext()->setContextProperty("circle_model", &model);
-    view.setSource(QUrl("qrc:/main.qml"));
-    view.resize(1000, 650);
-    view.show();
-    QString data;
-    QFile importedCSV("/users/simonmscharf/Downloads/csvTest 2.csv");
-    QStringList rowOfData;
-    QStringList rowData;
-    double latitude;
-    double longitude;
-    data.clear();
-    rowOfData.clear();
-    rowData.clear();
+        QStandardItemModel model;
+        QHash<int, QByteArray> roles;
+        roles[CoordinateRole] = QByteArray("coordinate");
+        model.setItemRoleNames(roles);
+        view.rootContext()->setContextProperty("circle_model", &model);
+        view.setSource(QUrl("qrc:/main.qml"));
+        view.resize(1000, 650);
+        view.show();
+        QString data;
+
+        QFile importedCSV("/users/simonmscharf/Downloads/csvTest 2.csv");
+        QStringList rowOfData;
+        QStringList rowData;
+        double latitude;
+        double longitude;
+        data.clear();
+        rowOfData.clear();
+        rowData.clear();
 
     if (importedCSV.open(QFile::ReadOnly))
     {
