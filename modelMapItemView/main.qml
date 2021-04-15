@@ -63,16 +63,5 @@ Map{
     }
 
 
-    Popup {
-        id: popup
-        parent: test_map_point
-        x: Math.round((parent.width - width) / 2)
-        y: Math.round((parent.height - height) / 2)
-        width: 200
-        height: 300
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-    }
 }
 
