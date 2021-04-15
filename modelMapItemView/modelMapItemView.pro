@@ -8,7 +8,6 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        model.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,7 +24,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 QT += positioning
 
 DISTFILES += \
-    menu/MainMenu.qml
+    SearchBar.qml \
+    SideBar.qml \
+    main.qml
 
 HEADERS += \
     model.h

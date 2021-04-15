@@ -1,9 +1,8 @@
-import QtQuick 2.14
+import QtQuick 2.4
 import QtPositioning 5.14
 import QtLocation 5.14
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
-import "menu"
 
 
 Map{

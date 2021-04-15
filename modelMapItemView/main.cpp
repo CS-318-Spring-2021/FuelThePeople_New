@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
         view.show();
         QString data;
 
-        QFile importedCSV("/users/simonmscharf/Downloads/csvTest 2.csv");
+        QFile importedCSV("/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv");
         QStringList rowOfData;
         QStringList rowData;
         double latitude;

@@ -1,10 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-<<<<<<< HEAD
-        <file>menu/SearchBar.qml</file>
-=======
+        <file>SearchBar.qml</file>
         <file>SideBar.qml</file>
->>>>>>> origin/main
     </qresource>
 </RCC>
