@@ -5,6 +5,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
 import "menu"
 
+
 Map{
     id: map_map
     anchors.centerIn: parent;
@@ -48,9 +49,10 @@ Map{
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = 'red' }
-                    onClicked: { popup.open() }
+                    onClicked: { info_bar.expanded = !info_bar.expanded}
 
-                }}
+                }
+            }
             coordinate: {
                 model.coordinate
             }
@@ -60,16 +62,10 @@ Map{
         }
     }
 
-    Popup {
-        id: popup
-        parent: test_map_point
-        x: Math.round((parent.width - width) / 2)
-        y: Math.round((parent.height - height) / 2)
-        width: 200
-        height: 300
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    SideBar {
+        id: info_bar
+        expanded: false
+        mapSource: map_map
     }
 
     GeocodeModel {
@@ -98,3 +94,4 @@ Map{
 
     }
 }
+
