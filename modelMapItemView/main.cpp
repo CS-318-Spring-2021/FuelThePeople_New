@@ -4,8 +4,9 @@
 #include <QGeoCoordinate>
 #include <QQmlContext>
 #include <QStandardItemModel>
+#include "locationModel.h"
 
-int CoordinateRole = Qt::UserRole + 1000;
+
 
 int main(int argc, char *argv[])
 {
@@ -14,18 +15,30 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
-
     QQuickView view;
+    view.setSource(QUrl("qrc:/main.qml"));
+    view.resize(1000, 650);
+    view.show();
+#if 1
+
+    locationModel *bakeryModel = new locationModel("bakery_model", "/users/ariellelandau/Desktop/csvTest.csv", "Bakery");
+    bakeryModel->addToMap(view);
+#else
+
+//    circleModel->createModel("circleModel");
+//    circleModel->readCSV("/users/ariellelandau/Desktop/csvTest/csv", *circleModel, "Bakery");
+
+
+
         QStandardItemModel model;
         QHash<int, QByteArray> roles;
+        int CoordinateRole = Qt::UserRole + 1000;
         roles[CoordinateRole] = QByteArray("coordinate");
         model.setItemRoleNames(roles);
         view.rootContext()->setContextProperty("circle_model", &model);
-        view.setSource(QUrl("qrc:/main.qml"));
-        view.resize(1000, 650);
-        view.show();
+
         QString data;
-        QFile importedCSV("/users/simonmscharf/Downloads/csvTest 2.csv");
+        QFile importedCSV("/users/ariellelandau/Desktop/csvTest.csv");
         QStringList rowOfData;
         QStringList rowData;
         double latitude;
@@ -52,6 +65,7 @@ int main(int argc, char *argv[])
             model.appendRow(item);
 
             }
+#endif
 
 //        QStandardItem *item = new QStandardItem;
 //        item->setData(QVariant::fromValue(QGeoCoordinate(40.66062, -73.95043)), CoordinateRole);

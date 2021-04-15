@@ -33,7 +33,7 @@ Map{
 
 
     MapItemView{
-        model: circle_model
+        model: bakery_model
         delegate:  MapQuickItem {
             id: test_map_point
             sourceItem: Rectangle { width: 14; height: 14; color: "#e41e25"; border.width: 2; border.color: "white"; smooth: true; radius: 7;
