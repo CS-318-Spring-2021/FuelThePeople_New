@@ -4,6 +4,7 @@ import QtLocation 5.14
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0 // or import Qt.labs.controls 1.0
 
+
 Map{
     id: map_map
     anchors.centerIn: parent;
@@ -16,19 +17,19 @@ Map{
     zoomLevel: 8
 
     Slider {
-            id: zoomSlider;
-            z: map_map.z + 3;
-            from: map_map.minimumZoomLevel;
-            to: map_map.maximumZoomLevel;
-            anchors.margins: 10
-            anchors.bottom: scale.top
-            anchors.top: parent.top
-            anchors.right: parent.right
-            orientation : Qt.Vertical
-            value: map_map.zoomLevel
-            onValueChanged: {
-                map_map.zoomLevel = value
-            }
+        id: zoomSlider;
+        z: map_map.z + 3;
+        from: map_map.minimumZoomLevel;
+        to: map_map.maximumZoomLevel;
+        anchors.margins: 10
+        anchors.bottom: scale.top
+        anchors.top: parent.top
+        anchors.right: parent.right
+        orientation : Qt.Vertical
+        value: map_map.zoomLevel
+        onValueChanged: {
+            map_map.zoomLevel = value
+        }
     }
 
 
@@ -42,9 +43,10 @@ Map{
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = 'red' }
-                    onClicked: { popup.open() }
+                    onClicked: { info_bar.expanded = !info_bar.expanded}
 
-                }}
+                }
+            }
             coordinate: {
                 model.coordinate
             }
@@ -54,16 +56,12 @@ Map{
         }
     }
 
-    Popup {
-        id: popup
-        parent: test_map_point
-        x: Math.round((parent.width - width) / 2)
-        y: Math.round((parent.height - height) / 2)
-        width: 200
-        height: 300
-        modal: true
-        focus: true
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    SideBar {
+        id: info_bar
+        expanded: false
+        mapSource: map_map
     }
+
+
 }
 
