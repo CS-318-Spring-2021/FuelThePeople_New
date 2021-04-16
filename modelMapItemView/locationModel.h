@@ -2,12 +2,15 @@
 #ifndef LOCATIONMODEL_H
 #define LOCATIONMODEL_H
 #include <QStandardItemModel>
+#include <QtQml/qqml.h>
 
 class QString;
 class QQuickView;
 
 class locationModel : public QStandardItemModel
 { Q_OBJECT
+  QML_ELEMENT
+
 private:
     QString modelName, filePath, amenityType;
 public:
