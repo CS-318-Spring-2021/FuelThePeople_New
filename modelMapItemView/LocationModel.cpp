@@ -1,4 +1,4 @@
-#include "locationModel.h"
+#include "LocationModel.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
@@ -9,17 +9,19 @@
 //make a constructor
 //add to view
 
-locationModel::locationModel(QString _modelName, QString _filePath, QString _amenityType) :
-    modelName(_modelName), filePath(_filePath), amenityType(_amenityType)
+LocationModel::LocationModel(QString _modelName, QString _filePath, QString _amenityType) :
+    modelName(_modelName), filePath(_filePath), amenityType(_amenityType), color(Qt::green) //unhardcode this
 { }
-void locationModel::addToMap(QQuickView &view) {
-    int CoordinateRole = Qt::UserRole + 1000;
+void LocationModel::addToMap(QQuickView &view) {
 
     QHash<int, QByteArray> roles;
     roles[CoordinateRole] = QByteArray("coordinate");
+    roles[ColorRole] = QByteArray("color");
     setItemRoleNames(roles);
-    view.rootContext()->setContextProperty(modelName, this);
 
+
+    view.rootContext()->setContextProperty(modelName, this);
+#if 1
     QString data;
     QFile importedCSV(filePath);
     QStringList rowOfData;
@@ -39,21 +41,25 @@ void locationModel::addToMap(QQuickView &view) {
 
     for (int x = 1; x < rowOfData.size(); x++)
     {
-        if (rowOfData[6] == amenityType) {
+
+        //if (rowOfData[6] == amenityType) {
 
 
             rowData = rowOfData.at(x).split(",");
+            //qDebug()<<rowData[6]<<amenityType; save as tab deliminited and then split by tab
 
             latitude= rowData[0].toDouble();
             longitude= rowData[1].toDouble();
             QStandardItem *item = new QStandardItem;
             item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), CoordinateRole);
+            item->setData(QVariant::fromValue(color), ColorRole);
             appendRow(item);
-        }
+        //}
 
     }
-
+#endif
 }
+
 
 //int mapModel::Coordinates() {
 //    int CoordinateRole = Qt::UserRole + 1000;

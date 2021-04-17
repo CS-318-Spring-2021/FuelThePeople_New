@@ -33,10 +33,10 @@ Map{
 
 
     MapItemView{
-        model: bakery_model
+        model: circle_model
         delegate:  MapQuickItem {
             id: test_map_point
-            sourceItem: Rectangle { width: 14; height: 14; color: "#e41e25"; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true

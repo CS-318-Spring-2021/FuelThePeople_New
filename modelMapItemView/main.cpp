@@ -4,7 +4,7 @@
 #include <QGeoCoordinate>
 #include <QQmlContext>
 #include <QStandardItemModel>
-#include "locationModel.h"
+#include "LocationModel.h"
 
 
 
@@ -19,67 +19,12 @@ int main(int argc, char *argv[])
     view.setSource(QUrl("qrc:/main.qml"));
     view.resize(1000, 650);
     view.show();
-#if 1
 
-    locationModel *bakeryModel = new locationModel("bakery_model", "/users/ariellelandau/Desktop/csvTest.csv", "Bakery");
-    bakeryModel->addToMap(view);
-#else
-
-//    circleModel->createModel("circleModel");
-//    circleModel->readCSV("/users/ariellelandau/Desktop/csvTest/csv", *circleModel, "Bakery");
+    LocationModel circleModel("circle_model", "/users/ariellelandau/Desktop/csvTest.csv", "Bakery");
+    circleModel.addToMap(view);
 
 
 
-        QStandardItemModel model;
-        QHash<int, QByteArray> roles;
-        int CoordinateRole = Qt::UserRole + 1000;
-        roles[CoordinateRole] = QByteArray("coordinate");
-        model.setItemRoleNames(roles);
-        view.rootContext()->setContextProperty("circle_model", &model);
-
-        QString data;
-        QFile importedCSV("/users/ariellelandau/Desktop/csvTest.csv");
-        QStringList rowOfData;
-        QStringList rowData;
-        double latitude;
-        double longitude;
-        data.clear();
-        rowOfData.clear();
-        rowData.clear();
-
-        if (importedCSV.open(QFile::ReadOnly))
-        {
-            data = importedCSV.readAll();
-            rowOfData = data.split("\n");
-            importedCSV.close();
-        }
-
-        for (int x = 1; x < rowOfData.size(); x++)
-        {
-            rowData = rowOfData.at(x).split(",");
-
-            latitude= rowData[0].toDouble();
-            longitude= rowData[1].toDouble();
-            QStandardItem *item = new QStandardItem;
-            item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), CoordinateRole);
-            model.appendRow(item);
-
-            }
-#endif
-
-//        QStandardItem *item = new QStandardItem;
-//        item->setData(QVariant::fromValue(QGeoCoordinate(40.66062, -73.95043)), CoordinateRole);
-//        model.appendRow(item);
-
-//        QStandardItem *item1 = new QStandardItem;
-//        item1->setData(QVariant::fromValue(QGeoCoordinate(40.65207, -73.94954)), CoordinateRole);
-//        model.appendRow(item1);
-
-//        QStandardItem *item2 = new QStandardItem;
-//        item2->setData(QVariant::fromValue(QGeoCoordinate(40.80438, -73.9558)), CoordinateRole);
-//        model.appendRow(item2);
-
-        return app.exec();
 
     return app.exec();
 }
