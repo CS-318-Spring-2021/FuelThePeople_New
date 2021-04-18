@@ -41,7 +41,7 @@ Map{
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
-                    onExited: {parent.color = 'red' }
+                    onExited: {parent.color = model.color }
                     onClicked: { popup.open() }
 
                 }}

@@ -20,11 +20,8 @@ int main(int argc, char *argv[])
     view.resize(1000, 650);
     view.show();
 
-    LocationModel circleModel("circle_model", "/users/ariellelandau/Desktop/csvTest.csv", "Bakery");
+    LocationModel circleModel("circle_model", "/users/ariellelandau/Desktop/csvTest.csv", "Bakery", Qt::red);
     circleModel.addToMap(view);
-
-
-
 
     return app.exec();
 }

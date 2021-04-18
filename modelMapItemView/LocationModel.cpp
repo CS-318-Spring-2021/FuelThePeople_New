@@ -9,8 +9,8 @@
 //make a constructor
 //add to view
 
-LocationModel::LocationModel(QString _modelName, QString _filePath, QString _amenityType) :
-    modelName(_modelName), filePath(_filePath), amenityType(_amenityType), color(Qt::green) //unhardcode this
+LocationModel::LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color) :
+    modelName(_modelName), filePath(_filePath), amenityType(_amenityType), color(_color)
 { }
 void LocationModel::addToMap(QQuickView &view) {
 
@@ -40,13 +40,10 @@ void LocationModel::addToMap(QQuickView &view) {
     }
 
     for (int x = 1; x < rowOfData.size(); x++)
-    {
-
-        //if (rowOfData[6] == amenityType) {
-
-
+    {     
             rowData = rowOfData.at(x).split(",");
-            //qDebug()<<rowData[6]<<amenityType; save as tab deliminited and then split by tab
+            qDebug()<<rowData[10]<<amenityType; //save as tab deliminited and then split by tab
+            //if (rowOfData[10] == amenityType) {
 
             latitude= rowData[0].toDouble();
             longitude= rowData[1].toDouble();
@@ -54,64 +51,11 @@ void LocationModel::addToMap(QQuickView &view) {
             item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), CoordinateRole);
             item->setData(QVariant::fromValue(color), ColorRole);
             appendRow(item);
-        //}
+            //}
+
 
     }
 #endif
 }
 
-
-//int mapModel::Coordinates() {
-//    int CoordinateRole = Qt::UserRole + 1000;
-//    return CoordinateRole;
-//}
-
-//void mapModel::createModel(const QString modelName) {
-//    QQuickView view;
-//    QStandardItemModel itemModel;
-//    QHash<int, QByteArray> roles;
-//    roles[Coordinates()] = QByteArray("coordinate");
-//    itemModel.setItemRoleNames(roles);
-//    view.rootContext()->setContextProperty(modelName, &itemModel);
-//    view.setSource(QUrl("qrc:/main.qml"));
-//    view.resize(1000, 650);
-//    view.show();
-
-//}
-
-//void mapModel::readCSV(const QString filePath, QStandardItemModel itemModel, const QString amenityType) {
-//    QString data;
-//    QFile importedCSV(filePath);
-//    QStringList rowOfData;
-//    QStringList rowData;
-//    double latitude;
-//    double longitude;
-//    data.clear();
-//    rowOfData.clear();
-//    rowData.clear();
-
-//    if (importedCSV.open(QFile::ReadOnly))
-//    {
-//        data = importedCSV.readAll();
-//        rowOfData = data.split("\n");
-//        importedCSV.close();
-//    }
-
-//    for (int x = 1; x < rowOfData.size(); x++)
-//    {
-//        if (rowOfData[6] == amenityType) {
-
-
-//            rowData = rowOfData.at(x).split(",");
-
-//            latitude= rowData[0].toDouble();
-//            longitude= rowData[1].toDouble();
-//            QStandardItem *item = new QStandardItem;
-//            item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), mapModel::Coordinates());
-//            itemModel.appendRow(item);
-//        }
-
-//    }
-
-//}
 
