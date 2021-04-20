@@ -41,17 +41,16 @@ void LocationModel::addToMap(QQuickView &view) {
 
     for (int x = 1; x < rowOfData.size(); x++)
     {
-            rowData = rowOfData.at(x).split(",");
-            //qDebug()<<rowData[10]<<amenityType; //save as tab deliminited and then split by tab
-            //if (rowOfData[10] == amenityType) {
-
+        rowData = rowOfData.at(x).split(",");
+        qDebug()<<rowData[3]<<amenityType;//save as tab deliminited and then split by tab
+        if (rowData[3] == amenityType) {
             latitude= rowData[0].toDouble();
             longitude= rowData[1].toDouble();
             QStandardItem *item = new QStandardItem;
             item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), CoordinateRole);
             item->setData(QVariant::fromValue(color), ColorRole);
             appendRow(item);
-            //}
+        }
 
 
     }

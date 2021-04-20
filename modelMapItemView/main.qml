@@ -39,9 +39,31 @@ Map{
     }
 
     MapItemView{
-        model: circle_model
+        model: bakery_model
         delegate:  MapQuickItem {
             id: test_map_point
+            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: { parent.color = 'purple' }
+                    onExited: {parent.color = model.color }
+                    onClicked: { info_bar.expanded = !info_bar.expanded}
+
+                }
+            }
+            coordinate: {
+                model.coordinate
+            }
+            opacity: 1.0
+            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
+
+        }
+    }
+    MapItemView{
+        model: rest_model
+        delegate:  MapQuickItem {
+            id: test_map_point2
             sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
                 MouseArea {
                     anchors.fill: parent
