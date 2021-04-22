@@ -21,7 +21,6 @@ void LocationModel::addToMap(QQuickView &view) {
 
 
     view.rootContext()->setContextProperty(modelName, this);
-#if 1
     QString data;
     QFile importedCSV(filePath);
     QStringList rowOfData;
@@ -54,5 +53,4 @@ void LocationModel::addToMap(QQuickView &view) {
 
 
     }
-#endif
 }

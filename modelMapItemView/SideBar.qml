@@ -92,15 +92,35 @@ Row {
         color: "white"
 
         Column {
+            id: imageColumn
+            spacing: 10
+            topPadding: 10
+            bottomPadding: 48
+            anchors.horizontalCenter: parent.horizontalCenter
+            Image {
+                width: parent.parent.width; height: 2/3*parent.parent.width
+                fillMode: Image.Pad
+                verticalAlignment: Image.AlignTop
+                horizontalAlignment: Image.AlignTop
+                source: "http://images.citysearch.net/assets/imgdb2/reinvent/profile/2012/7/27/0/tfKQnpBn.jpg"
+            }
+        }
+
+        Column {
             id: textColumn
             spacing: 10
-            topPadding: 16
+            topPadding: 300
             bottomPadding: 48
             anchors.horizontalCenter: parent.horizontalCenter
             Text {
-                id: random_text
+                id: title
                 font.pointSize: fontSize
-                text: qsTr("This is random text")
+                text: qsTr("This is title")
+            }
+            Text {
+                id: description
+                font.pointSize: fontSize
+                text: qsTr("This is decription")
             }
         }
     }
