@@ -115,7 +115,7 @@ Row {
             Text {
                 id: title
                 font.pointSize: fontSize
-                text: qsTr("This is title")
+                text: qsTr(parent.name)
             }
             Text {
                 id: description

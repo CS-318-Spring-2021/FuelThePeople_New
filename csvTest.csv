@@ -1,8 +1,8 @@
-Latitude,Longitude,Name,Full Address,Order Link,Latitude and Longitude,Amenity Type
-40.66062,-73.95043,Allan''s Bakery,"1109 Nostrand Ave, Brooklyn, NY 11225, United States",https://www.allansbakery.com/bakery-menu.html,"40.66062, -73.95043",Bakery
-40.65207,-73.94954,Aunt Et Uncles,"1407 Nostrand Ave, Brooklyn, NY 11226, United States",https://www.auntsetuncles.com/#BzPfRV,"40.65207, -73.94954",Restaurant
-40.67209,-73.95731,Barboncino Pizza,"781 Franklin Ave, Brooklyn, NY 11238, United States",https://www.barboncinopizza.com/#order-online,"40.67209, -73.95731",Restaurant
-40.67578,-73.94201,Bergen,"1299 Bergen St, Brooklyn, NY 11213, United States",https://www.thebergenbk.com/menu,"40.67578, -73.94201",Restaurant
-40.84971,-73.91985,Black Rican Vegan,"Morris Heights, Bronx, NY, United States",https://www.blackricanvegan.com/#FlSDBy,"40.84971, -73.91985",Restaurant
-40.80438,-73.9558,BLVD,"2149 Frederick Douglass Blvd, New York, NY 10026, United States",https://www.boulevardbistrony.com/#order-online,"40.80438, -73.9558",Bakery
-40.72017,-73.98399,Bun Hut,"178 Stanton St, New York, NY 10002, United States",https://thebunhut.foodieordersecure.com/,"40.72017, -73.98399",Bakery
+Latitude,Longitude,Name,Amenity Type,Full Address,Order Link,Latitude and Longitude
+40.66062,-73.95043,Allan''s Bakery,Bakery,"1109 Nostrand Ave, Brooklyn, NY 11225, United States",https://www.allansbakery.com/bakery-menu.html,"40.66062, -73.95043"
+40.65207,-73.94954,Aunt Et Uncles,Restaurant,"1407 Nostrand Ave, Brooklyn, NY 11226, United States",https://www.auntsetuncles.com/#BzPfRV,"40.65207, -73.94954"
+40.67209,-73.95731,Barboncino Pizza,Restaurant,"781 Franklin Ave, Brooklyn, NY 11238, United States",https://www.barboncinopizza.com/#order-online,"40.67209, -73.95731"
+40.67578,-73.94201,Bergen,Restaurant,"1299 Bergen St, Brooklyn, NY 11213, United States",https://www.thebergenbk.com/menu,"40.67578, -73.94201"
+40.84971,-73.91985,Black Rican Vegan,Restaurant,"Morris Heights, Bronx, NY, United States",https://www.blackricanvegan.com/#FlSDBy,"40.84971, -73.91985"
+40.80438,-73.9558,BLVD,Bakery,"2149 Frederick Douglass Blvd, New York, NY 10026, United States",https://www.boulevardbistrony.com/#order-online,"40.80438, -73.9558"
+40.72017,-73.98399,Bun Hut,Bakery,"178 Stanton St, New York, NY 10002, United States",https://thebunhut.foodieordersecure.com/,"40.72017, -73.98399"

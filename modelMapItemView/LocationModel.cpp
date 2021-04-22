@@ -17,6 +17,7 @@ void LocationModel::addToMap(QQuickView &view) {
     QHash<int, QByteArray> roles;
     roles[CoordinateRole] = QByteArray("coordinate");
     roles[ColorRole] = QByteArray("color");
+    roles[NameRole] = QByteArray("name");
     setItemRoleNames(roles);
 
 
@@ -27,6 +28,7 @@ void LocationModel::addToMap(QQuickView &view) {
     QStringList rowData;
     double latitude;
     double longitude;
+    QString name;
     data.clear();
     rowOfData.clear();
     rowData.clear();
@@ -45,7 +47,9 @@ void LocationModel::addToMap(QQuickView &view) {
         if (rowData[3] == amenityType) {
             latitude= rowData[0].toDouble();
             longitude= rowData[1].toDouble();
+            name = rowData[2];
             QStandardItem *item = new QStandardItem;
+            item->setData(QVariant::fromValue(name), NameRole);
             item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), CoordinateRole);
             item->setData(QVariant::fromValue(color), ColorRole);
             appendRow(item);
