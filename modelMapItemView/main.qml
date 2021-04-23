@@ -28,8 +28,8 @@ Map{
             to: map_map.maximumZoomLevel;
             from: map_map.minimumZoomLevel;
             anchors.margins: 10
-            anchors.bottom: scale.top
-            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.top: scale.top
             anchors.right: parent.right
             orientation : Qt.Vertical
             value: map_map.zoomLevel
@@ -87,6 +87,7 @@ Map{
         id: info_bar
         expanded: false
         mapSource: map_map
+        anchors.top: parent.top
     }
 
     GeocodeModel {
