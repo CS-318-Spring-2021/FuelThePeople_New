@@ -88,7 +88,7 @@ Row {
     Rectangle {
         id: info_container
         height: parent.height
-        width: parent.parent.width * 0.2
+        width: parent.parent.width * 0.3
         visible: sideBarToggler.checked
         // color: Qt.rgba( 0, 191 / 255.0, 255 / 255.0, 0.07)
         // the above color is if we want slightly transparent, green background
@@ -97,9 +97,9 @@ Row {
         Column {
             id: imageColumn
             spacing: 10
-            topPadding: 10
             bottomPadding: 48
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
             Image {
                 width: parent.parent.width; height: 2/3*parent.parent.width
                 fillMode: Image.PreserveAspectFit

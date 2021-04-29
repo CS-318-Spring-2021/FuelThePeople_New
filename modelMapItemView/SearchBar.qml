@@ -6,6 +6,7 @@ ToolBar {
 
     signal goLocation(string location)
 
+    anchors.right: parent.right
     RowLayout {
         id: searchBar
         width: parent.width
