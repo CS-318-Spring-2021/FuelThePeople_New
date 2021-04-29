@@ -92,35 +92,50 @@ Row {
         color: "white"
 
         Column {
-            id: imageColumn
-            spacing: 10
-            bottomPadding: 48
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.left: parent.left
-            Image {
-                width: parent.parent.width; height: 2/3*parent.parent.width
-                fillMode: Image.PreserveAspectFit
-                verticalAlignment: Image.AlignTop
-                horizontalAlignment: Image.AlignTop
-                source: "http://images.citysearch.net/assets/imgdb2/reinvent/profile/2012/7/27/0/tfKQnpBn.jpg"
-            }
-        }
+            id: informationColumn
+            height: parent.height
+            width: parent.width
 
-        Column {
-            id: textColumn
-            spacing: 10
-            topPadding: 300
-            bottomPadding: 48
-            anchors.horizontalCenter: parent.horizontalCenter
-            Text {
-                id: title
-                font.pointSize: fontSize
-                text: qsTr(parent.name)
+            Row {
+                id: imageRow
+                spacing: 10
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.left: parent.left
+                Image {
+                    width: parent.parent.width; height: 2/3*parent.parent.width
+                    fillMode: Image.PreserveAspectFit
+                    verticalAlignment: Image.AlignTop
+                    horizontalAlignment: Image.AlignTop
+                    source: "http://images.citysearch.net/assets/imgdb2/reinvent/profile/2012/7/27/0/tfKQnpBn.jpg"
+                }
             }
-            Text {
-                id: description
-                font.pointSize: fontSize
-                text: qsTr("This is decription")
+
+            Row {
+                id: descriptionRow
+                spacing: 10
+                topPadding: 20
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text {
+                    id: description
+                    font.pointSize: fontSize
+                    text: qsTr("This is description")
+                }
+            }
+            Row {
+                id: addressRow
+                spacing: 10
+                topPadding: 20
+                leftPadding: 30
+                Image {
+                    width: 20; height: 20
+                    fillMode: Image.PreserveAspectFit
+                    source: "location_icon.png"
+                }
+                Text {
+                    id: address
+                    font.pointSize: fontSize
+                    text: qsTr("this is the address")
+                }
             }
         }
     }
