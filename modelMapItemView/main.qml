@@ -40,15 +40,22 @@ Map{
 
     MapItemView{
         model: bakery_model
+        id: mapItemView
         delegate:  MapQuickItem {
             id: test_map_point
             sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
                 MouseArea {
+                    id: mouseArea
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = model.color }
-                    onClicked: { info_bar.expanded = !info_bar.expanded}
+                    onClicked: {
+                        info_bar.expanded = !info_bar.expanded
+                        console.info(model.name)
+                        info_bar.locationTitle = model.name
+                        info_bar.locationWebsite = model.website
+                    }
 
                 }
             }
@@ -70,7 +77,11 @@ Map{
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = model.color }
-                    onClicked: { info_bar.expanded = !info_bar.expanded}
+                    onClicked: {
+                        info_bar.expanded = !info_bar.expanded
+                        info_bar.locationTitle = model.name
+                        info_bar.locationWebsite = model.website
+                    }
 
                 }
             }
@@ -87,12 +98,14 @@ Map{
         id: info_bar
         expanded: false
         mapSource: map_map
+//        locationTitle: model.name
     }
 
     GeocodeModel {
         id: geocodeModel
         plugin: Plugin {
-            name: 'osm'}
+            name: 'osm'
+        }
         autoUpdate: false
 
         onLocationsChanged: {

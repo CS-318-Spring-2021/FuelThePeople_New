@@ -11,6 +11,9 @@ Row {
     property int edge: Qt.LeftEdge
     property alias expanded: sideBarToggler.checked
 
+    property string locationTitle: "title"
+    property string locationWebsite: "website"
+
     function rightEdge() {
         return (containerRow.edge === Qt.RightEdge);
     }
@@ -99,7 +102,7 @@ Row {
             anchors.horizontalCenter: parent.horizontalCenter
             Image {
                 width: parent.parent.width; height: 2/3*parent.parent.width
-                fillMode: Image.Pad
+                fillMode: Image.PreserveAspectFit
                 verticalAlignment: Image.AlignTop
                 horizontalAlignment: Image.AlignTop
                 source: "http://images.citysearch.net/assets/imgdb2/reinvent/profile/2012/7/27/0/tfKQnpBn.jpg"
@@ -115,14 +118,18 @@ Row {
             Text {
                 id: title
                 font.pointSize: fontSize
-                text: qsTr(parent.name)
+                text: locationTitle
             }
             Text {
                 id: description
                 font.pointSize: fontSize
                 text: qsTr("This is decription")
             }
+            Text {
+                id: website
+                font.pointSize: fontSize
+                text: locationWebsite
+            }
         }
     }
 }
-
