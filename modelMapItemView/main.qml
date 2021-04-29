@@ -4,7 +4,6 @@ import QtLocation 5.14
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
 
-
 Map{
     id: map_map
     anchors.centerIn: parent;
