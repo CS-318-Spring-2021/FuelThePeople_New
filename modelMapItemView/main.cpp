@@ -18,10 +18,10 @@ int main(int argc, char *argv[])
     view.resize(1000, 650);
     view.show();
 
-    LocationModel bakeryModel("bakery_model", "/users/ariellelandau/Desktop/csvTest.csv", "Bakery", Qt::red);
+    LocationModel bakeryModel("bakery_model", "/Users/simonmscharf/Downloads/csvTest.csv", "Bakery", Qt::red);
     bakeryModel.addToMap(view);
 
-    LocationModel restModel("rest_model", "/users/ariellelandau/Desktop/csvTest.csv", "Restaurant", Qt::green);
+    LocationModel restModel("rest_model", "/Users/simonmscharf/Downloads/csvTest.csv", "Restaurant", Qt::green);
     restModel.addToMap(view);
 
     return app.exec();

@@ -11,6 +11,9 @@ Row {
     property int edge: Qt.LeftEdge
     property alias expanded: sideBarToggler.checked
 
+    property string locationTitle: "title"
+    property string locationWebsite: "website"
+
     function rightEdge() {
         return (containerRow.edge === Qt.RightEdge);
     }
@@ -85,24 +88,64 @@ Row {
     Rectangle {
         id: info_container
         height: parent.height
-        width: parent.parent.width * 0.2
+        width: parent.parent.width * 0.3
         visible: sideBarToggler.checked
         // color: Qt.rgba( 0, 191 / 255.0, 255 / 255.0, 0.07)
         // the above color is if we want slightly transparent, green background
         color: "white"
 
         Column {
-            id: textColumn
-            spacing: 10
-            topPadding: 16
-            bottomPadding: 48
-            anchors.horizontalCenter: parent.horizontalCenter
+            id: informationColumn
+            height: parent.height
+            width: parent.width
+
+            Row {
+                id: imageRow
+                spacing: 10
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.left: parent.left
+                Image {
+                    width: parent.parent.width; height: 2/3*parent.parent.width
+                    fillMode: Image.PreserveAspectFit
+                    verticalAlignment: Image.AlignTop
+                    horizontalAlignment: Image.AlignTop
+                    source: "http://images.citysearch.net/assets/imgdb2/reinvent/profile/2012/7/27/0/tfKQnpBn.jpg"
+                }
+            }
+
+            Row {
+                id: descriptionRow
+                spacing: 10
+                topPadding: 20
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text {
+                    id: description
+                    font.pointSize: fontSize
+                    text: qsTr("This is description")
+                }
+
+            }
+            Row {
+                id: addressRow
+                spacing: 10
+                topPadding: 20
+                leftPadding: 30
+                Image {
+                    width: 20; height: 20
+                    fillMode: Image.PreserveAspectFit
+                    source: "location_icon.png"
+                }
+                Text {
+                    id: address
+                    font.pointSize: fontSize
+                    text: qsTr("this is the address")
+                }
+            }
             Text {
-                id: random_text
+                id: website
                 font.pointSize: fontSize
-                text: qsTr("This is random text")
+                text: locationWebsite
             }
         }
     }
 }
-

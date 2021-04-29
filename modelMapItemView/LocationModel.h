@@ -18,7 +18,9 @@ private:
 public:
     enum {
        CoordinateRole = Qt::UserRole + 1000,
-       ColorRole
+       ColorRole,
+       NameRole,
+       WebsiteRole
     };
     LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color);
     void addToMap(QQuickView &view);
