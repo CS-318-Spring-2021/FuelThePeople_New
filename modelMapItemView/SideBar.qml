@@ -11,6 +11,9 @@ Row {
     property int edge: Qt.LeftEdge
     property alias expanded: sideBarToggler.checked
 
+    property string locationTitle: "title"
+    property string locationWebsite: "website"
+
     function rightEdge() {
         return (containerRow.edge === Qt.RightEdge);
     }
@@ -120,6 +123,7 @@ Row {
                     font.pointSize: fontSize
                     text: qsTr("This is description")
                 }
+
             }
             Row {
                 id: addressRow
@@ -137,7 +141,11 @@ Row {
                     text: qsTr("this is the address")
                 }
             }
+            Text {
+                id: website
+                font.pointSize: fontSize
+                text: locationWebsite
+            }
         }
     }
 }
-
