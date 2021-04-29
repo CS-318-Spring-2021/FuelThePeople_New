@@ -114,7 +114,7 @@ Row {
             }
 
             Row {
-                id: addressRow
+                id: nameRow
                 spacing: 10
                 topPadding: 20
                 leftPadding: 30

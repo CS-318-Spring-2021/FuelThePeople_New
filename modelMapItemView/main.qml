@@ -98,6 +98,7 @@ Map{
         expanded: false
         mapSource: map_map
         locationTitle: model.name
+        locationWebsite: model.website
         anchors.top: parent.top
     }
 
