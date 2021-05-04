@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.0 as C2
 
+
 Row {
     id: containerRow
 
@@ -32,7 +33,7 @@ Row {
         id: sideBarToggler
         width: 32
         height: 96
-        checkable: true
+        checkable: (locationTitle!=='title')
         anchors.verticalCenter: parent.verticalCenter
 
         transform:  Scale {
@@ -113,23 +114,43 @@ Row {
                 }
             }
 
+
+
+
+            Row {
+                id: titleRow
+                spacing: 10
+                leftPadding: 20
+                topPadding: 10
+                anchors.left: parent.left
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text {
+                    id: title
+                    font.pointSize: fontSize
+                    text: qsTr(locationTitle)
+                }
+            }
+
             Row {
                 id: descriptionRow
                 spacing: 10
-                topPadding: 20
+                leftPadding: 20
+                topPadding: 10
+                anchors.left: parent.left
                 anchors.horizontalCenter: parent.horizontalCenter
                 Text {
                     id: description
                     font.pointSize: fontSize
-                    text: qsTr("This is description")
+                    text: qsTr("Description: ")
                 }
-
             }
+
             Row {
                 id: addressRow
                 spacing: 10
-                topPadding: 20
-                leftPadding: 30
+                leftPadding: 20
+                topPadding: 10
+                anchors.left: parent.left
                 Image {
                     width: 20; height: 20
                     fillMode: Image.PreserveAspectFit
@@ -141,11 +162,26 @@ Row {
                     text: qsTr("this is the address")
                 }
             }
-            Text {
-                id: website
-                font.pointSize: fontSize
-                text: locationWebsite
+
+            Row {
+                id: websiteRow
+                spacing: 10
+                leftPadding: 20
+                topPadding: 10
+                anchors.left: parent.left
+                Text {
+                    id: website
+                    font.pointSize: fontSize
+                    text: "To order online, <a href='" + locationWebsite + "'>click here</a>"
+                    onLinkActivated: Qt.openUrlExternally(link)
+                    MouseArea {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.NoButton // we don't want to eat clicks on the Text
+                        cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                    }
+                }
             }
+
         }
     }
 }
