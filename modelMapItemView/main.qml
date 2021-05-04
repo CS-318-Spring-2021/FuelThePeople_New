@@ -26,7 +26,7 @@ Map{
             z: map_map.z + 3
             to: map_map.maximumZoomLevel;
             from: map_map.minimumZoomLevel;
-            anchors.margins: 10
+            anchors.margins: 30
             anchors.bottom: parent.bottom
             anchors.top: scale.top
             anchors.right: parent.right
@@ -90,6 +90,39 @@ Map{
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
 
+        }
+    }
+    MapItemView{
+
+        Slider {
+            id: accessSlider;
+            to: 80;
+            from: 14;
+            anchors.margins: 10
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            orientation : Qt.Horizontal
+            value: 14
+            onMoved: {
+                emptyRadii.width = value
+            }
+        }
+        model: emptyRadii
+        delegate:  MapQuickItem {
+            id: empty_points
+            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width; color: "purple";
+                border.width: 2; border.color: "purple"; opacity: 0.5 ; radius: 0.5*width;
+                MouseArea {
+                    id : expandingRadii
+                    anchors.fill: parent
+                }
+
+            }
+            coordinate: {
+                model.coordinate
+            }
+            opacity: 1.0
+            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
         }
     }
 
