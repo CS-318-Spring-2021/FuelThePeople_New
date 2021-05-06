@@ -188,6 +188,7 @@ Map{
     Button {
         id: locationButton
         text: "Go to current location"
+        anchors.horizontalCenter: parent.horizontalCenter
         onClicked:
             map_map.changeLocation(getLocation.position.coordinate)
     }

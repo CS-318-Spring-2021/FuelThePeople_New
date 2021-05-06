@@ -137,7 +137,7 @@ Row {
                 topPadding: 20
                 leftPadding: 30
                 Text {
-                    id: title
+                    id: name
                     font.pointSize: fontSize
                     text: locationTitle
                 }
