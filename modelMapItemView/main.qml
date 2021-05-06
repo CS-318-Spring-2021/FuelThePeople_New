@@ -21,19 +21,19 @@ Map{
     }
 
     Slider {
-            id: zoomSlider;
-            z: map_map.z + 3
-            to: map_map.maximumZoomLevel;
-            from: map_map.minimumZoomLevel;
-            anchors.margins: 30
-            anchors.bottom: parent.bottom
-            anchors.top: scale.top
-            anchors.right: parent.right
-            orientation : Qt.Vertical
-            value: map_map.zoomLevel
-            onValueChanged: {
-                map_map.zoomLevel = value
-            }
+        id: zoomSlider;
+        z: map_map.z + 3
+        to: map_map.maximumZoomLevel;
+        from: map_map.minimumZoomLevel;
+        anchors.margins: 10
+        anchors.bottom: parent.bottom
+        anchors.top: scale.top
+        anchors.right: parent.right
+        orientation : Qt.Vertical
+        value: map_map.zoomLevel
+        onValueChanged: {
+            map_map.zoomLevel = value
+        }
     }
 
     MapItemView {
@@ -49,10 +49,9 @@ Map{
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = model.color }
                     onClicked: {
-                        info_bar.expanded = !info_bar.expanded
-                        console.info(model.name)
                         info_bar.locationTitle = model.name
                         info_bar.locationWebsite = model.website
+                        info_bar.expanded = true
                     }
 
                 }
@@ -77,9 +76,9 @@ Map{
                     onEntered: { parent.color = 'purple' }
                     onExited: {parent.color = model.color }
                     onClicked: {
-                        info_bar.expanded = !info_bar.expanded
                         info_bar.locationTitle = model.name
                         info_bar.locationWebsite = model.website
+                        info_bar.expanded = true
                     }
 
                 }
