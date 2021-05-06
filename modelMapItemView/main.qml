@@ -38,7 +38,7 @@ Map{
 
     MapItemView {
         model: bakery_model
-        id: mapItemView
+        id: bakeryModel
         delegate:  MapQuickItem {
             id: test_map_point
             sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
@@ -68,7 +68,7 @@ Map{
     MapItemView {
         model: rest_model
         delegate:  MapQuickItem {
-            id: test_map_point2
+            id: restModel
             sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
                 MouseArea {
                     anchors.fill: parent
@@ -93,7 +93,7 @@ Map{
 
         }
     }
-
+    //visualize access through a slider
     MapItemView{
         Slider {
             id: accessSlider;
@@ -158,6 +158,7 @@ Map{
 
     }
 
+    //display current location
     PositionSource {
         property variant coord
 

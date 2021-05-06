@@ -16,6 +16,7 @@ private:
     QColor color;
 
 public:
+    //enumerate roles to communicate between the model and QML
     enum {
        CoordinateRole = Qt::UserRole + 1000,
        ColorRole,
