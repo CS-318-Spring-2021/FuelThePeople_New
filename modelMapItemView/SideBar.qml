@@ -132,6 +132,18 @@ Row {
             }
 
             Row {
+                id: nameRow
+                spacing: 10
+                topPadding: 20
+                leftPadding: 30
+                Text {
+                    id: title
+                    font.pointSize: fontSize
+                    text: locationTitle
+                }
+            }
+
+            Row {
                 id: descriptionRow
                 spacing: 10
                 leftPadding: 20

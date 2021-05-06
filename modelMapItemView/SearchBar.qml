@@ -3,9 +3,7 @@ import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 
 ToolBar {
-
     signal goLocation(string location)
-
     anchors.right: parent.right
     RowLayout {
         id: searchBar
