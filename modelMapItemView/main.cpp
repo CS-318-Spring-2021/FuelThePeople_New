@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     LocationModel restModel("rest_model", "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv", "Restaurant", Qt::green);
     restModel.addToMap(view);
 
-    LocationModel expandingRadii("emptyRadii", "/Users/ariellelandau/Desktop/csvTest.csv", "Restaurant", Qt::green);
+    LocationModel expandingRadii("emptyRadii", "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv", "Restaurant", Qt::green);
     expandingRadii.addToMap(view);
 
     return app.exec();

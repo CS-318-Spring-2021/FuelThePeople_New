@@ -18,7 +18,6 @@ Map{
     function changeLocation(text) {
         geocodeModel.query = text
         geocodeModel.update()
-        console.info("location update")
     }
 
     Slider {
@@ -37,7 +36,7 @@ Map{
             }
     }
 
-    MapItemView{
+    MapItemView {
         model: bakery_model
         id: mapItemView
         delegate:  MapQuickItem {
@@ -66,7 +65,8 @@ Map{
 
         }
     }
-    MapItemView{
+
+    MapItemView {
         model: rest_model
         delegate:  MapQuickItem {
             id: test_map_point2
@@ -84,16 +84,18 @@ Map{
 
                 }
             }
+
             coordinate: {
                 model.coordinate
             }
+
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
 
         }
     }
-    MapItemView{
 
+    MapItemView{
         Slider {
             id: accessSlider;
             to: 80;
@@ -137,15 +139,10 @@ Map{
 
     GeocodeModel {
         id: geocodeModel
-        plugin: Plugin {
-            name: 'osm'
-        }
+        plugin: Plugin { name: 'osm' }
         autoUpdate: false
-
         onLocationsChanged: {
             if (count != 0) {
-                console.info("location changed")
-                console.info(count)
                 map_map.center.latitude = get(0).coordinate.latitude
                 map_map.center.longitude = get(0).coordinate.longitude
                 map_map.zoomLevel = 14
@@ -161,5 +158,39 @@ Map{
         }
 
     }
-}
 
+    PositionSource {
+        property variant coord
+
+        id: getLocation
+        updateInterval: 10000
+        active: true
+        onPositionChanged: {
+            coord = getLocation.position.coordinate;
+        }
+    }
+
+    MapQuickItem {
+        id: currentMarker
+        sourceItem: Rectangle {
+            width: 14;
+            height: 14;
+            color: "blue";
+            border.width: 2;
+            border.color: "white";
+            smooth: true;
+            radius: 7;
+        }
+        coordinate: QtPositioning.coordinate(getLocation.coord.latitude,
+                                              getLocation.coord.longitude)
+    }
+
+
+    Button {
+        id: locationButton
+        text: "Go to current location"
+        onClicked:
+            map_map.changeLocation(getLocation.position.coordinate)
+    }
+
+}
