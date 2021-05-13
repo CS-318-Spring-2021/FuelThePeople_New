@@ -3,6 +3,11 @@
 #define LOCATIONMODEL_H
 #include <QStandardItemModel>
 #include <QtQml/qqml.h>
+#include <locationrecord.h>
+#include <QNetworkAccessManager>
+#include <QVariant>
+#include "locationrecord.h"
+#include "filedownloader.h"
 
 class QString;
 class QQuickView;
@@ -15,14 +20,29 @@ private:
     QString modelName, filePath, amenityType;
     QColor color;
 
+
 public:
     enum {
-       CoordinateRole = Qt::UserRole + 1000,
-       ColorRole
+        CoordinateRole = Qt::UserRole + 1000,
+        ColorRole,
+        NameRole,
+        WebsiteRole
     };
+
+    std::list<LocationRecord> records;
+    FileDownloader *newFile;
+    std::map<QUrl, FileDownloader> files;
     LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color);
     void addToMap(QQuickView &view);
+    void importCSV();
+    void importJSon();
+//    std::map<QString, LocationRecord> getLocationRecordList();
+//    LocationRecord getLocationRecord(QString id);
+//    void appendLocationRecordList(QVariant data);
 
+
+public slots:
+    void processData();
 };
 
 #endif // LOCATIONMODEL_H
