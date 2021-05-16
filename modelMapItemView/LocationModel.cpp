@@ -20,6 +20,7 @@ void LocationModel::addToMap(QQuickView &view) {
     roles[ColorRole] = QByteArray("color");
     roles[NameRole] = QByteArray("name");
     roles[WebsiteRole] = QByteArray("website");
+    roles[AmenityRole] = QByteArray("amenity");
     setItemRoleNames(roles);
 
     view.rootContext()->setContextProperty(modelName, this);
@@ -57,6 +58,7 @@ void LocationModel::addToMap(QQuickView &view) {
             //uses QStandardItem to assign attributes from the CSV to roles
             QStandardItem *item = new QStandardItem;
             item->setData(QVariant::fromValue(name), NameRole);
+            item->setData(QVariant::fromValue(amenityType), AmenityRole);
             item->setData(QVariant::fromValue(orderLink), WebsiteRole);
             item->setData(QVariant::fromValue(QGeoCoordinate(latitude, longitude)), CoordinateRole);
             item->setData(QVariant::fromValue(color), ColorRole);

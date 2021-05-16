@@ -3,6 +3,7 @@ import QtPositioning 5.14
 import QtLocation 5.14
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
+import QtQuick.Controls.Styles 1.4
 
 Map{
     id: map_map
@@ -95,17 +96,44 @@ Map{
     }
     //visualize access through a slider
     MapItemView{
+        ComboBox {
+            id: visualizeAccess
+            currentIndex: 0
+//            ComboBoxStyle {
+//                //control: visualizeAccess
+//                label: Visualize
+//                selectedTextColor: "purple"
+//            }
+
+
+            model: ListModel {
+                id: amItems
+                ListElement { text: "Bakery" }
+                ListElement { text: "Restaurant" }
+
+            }
+            width: 200
+            onCurrentIndexChanged: {
+
+                emptyRadii.amenity = amItems.get(currentIndex).text
+                //console.log(emptyRadii.amenity)s
+
+            }
+
+        }
+
         Slider {
             id: accessSlider;
             to: 80;
             from: 14;
-            anchors.margins: 10
+            anchors.margins: 30
             anchors.bottom: parent.bottom
             anchors.right: parent.right
             orientation : Qt.Horizontal
             value: 14
             onMoved: {
                 emptyRadii.width = value
+
             }
         }
         model: emptyRadii

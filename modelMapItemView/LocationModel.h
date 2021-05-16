@@ -21,7 +21,8 @@ public:
        CoordinateRole = Qt::UserRole + 1000,
        ColorRole,
        NameRole,
-       WebsiteRole
+       WebsiteRole,
+       AmenityRole
     };
     LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color);
     void addToMap(QQuickView &view);
