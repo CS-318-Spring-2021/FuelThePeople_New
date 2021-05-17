@@ -108,13 +108,6 @@ Map{
 
             }
             width: 200
-            onCurrentIndexChanged: {
-
-                emptyRadii.amenity = amItems.get(currentIndex).text
-                console.log(emptyRadii.amenity)
-                emptyRadii.refreshDots("purple")
-
-            }
 
         }
 
@@ -127,20 +120,12 @@ Map{
             anchors.right: parent.right
             orientation : Qt.Horizontal
             value: 14
-            onMoved: {
-                emptyRadii.width = value
 
-
-            }
         }
         model: emptyRadii
         delegate:  MapQuickItem {
             sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width;
-                color: "white";
-                function refreshDots(updatedColor) {
-                    emptyPoints.color = updatedColor
-                }
-
+                color: { if (visualizeAccess.currentIndex === 0 && model.amenity === "Bakery") "purple"; else if (visualizeAccess.currentIndex === 1 && model.amenity === "Restaurant") "orange";}
                 border.width: 2; border.color: "purple"; opacity: 0.5; radius: 0.5*width; //if (model.amenity === emptyRadii.amenity) 0.5; else 0
                 MouseArea {
                     id : expandingRadii
