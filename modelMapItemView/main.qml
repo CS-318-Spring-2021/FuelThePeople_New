@@ -100,12 +100,6 @@ Map{
         ComboBox {
             id: visualizeAccess
             currentIndex: 0
-//            ComboBoxStyle {
-//                //control: visualizeAccess
-//                label: Visualize
-//                selectedTextColor: "purple"
-//            }
-
 
             model: ListModel {
                 id: amItems
@@ -118,7 +112,7 @@ Map{
 
                 emptyRadii.amenity = amItems.get(currentIndex).text
                 console.log(emptyRadii.amenity)
-
+                emptyRadii.refreshDots("purple")
 
             }
 
@@ -135,14 +129,18 @@ Map{
             value: 14
             onMoved: {
                 emptyRadii.width = value
-               // console.log(value)
+
 
             }
         }
         model: emptyRadii
         delegate:  MapQuickItem {
-            id: empty_points
-            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width; color: {if (emptyRadii.amenity === "Bakery")"purple";}
+            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width;
+                color: "white";
+                function refreshDots(updatedColor) {
+                    emptyPoints.color = updatedColor
+                }
+
                 border.width: 2; border.color: "purple"; opacity: 0.5; radius: 0.5*width; //if (model.amenity === emptyRadii.amenity) 0.5; else 0
                 MouseArea {
                     id : expandingRadii
@@ -156,6 +154,7 @@ Map{
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
         }
+
     }
 
     SideBar {
