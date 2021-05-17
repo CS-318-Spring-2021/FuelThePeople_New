@@ -8,8 +8,8 @@
 
 
 
-LocationModel::LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color) :
-    modelName(_modelName), filePath(_filePath), amenityType(_amenityType), color(_color)
+LocationModel::LocationModel(QString _modelName, QString _filePath, QColor _color) :
+    modelName(_modelName), filePath(_filePath), color(_color)
 { }
 
 //populates map with points with attributes according to the model and the enumerated roles
@@ -30,6 +30,7 @@ void LocationModel::addToMap(QQuickView &view) {
     QStringList rowData;
     double latitude;
     double longitude;
+    QString amenityType;
     QString name;
     QString orderLink;
     data.clear();
@@ -47,13 +48,14 @@ void LocationModel::addToMap(QQuickView &view) {
     for (int x = 1; x < rowOfData.size(); x++)
     {
         rowData = rowOfData.at(x).split(",");
-        qDebug()<<rowData[3]<<amenityType;
-        //filter by amenity type
-        if (rowData[3] == amenityType) {
+        //qDebug()<<rowData[3]<<amenityType;
+        //filter by amenity type, move to QML in order to have the drop down menu choose what is displayed?
+        //if (rowData[3] == amenityType) {
             latitude= rowData[0].toDouble();
             longitude= rowData[1].toDouble();
             name = rowData[2];
             orderLink = rowData[8];
+            amenityType = rowData[3];
 
             //uses QStandardItem to assign attributes from the CSV to roles
             QStandardItem *item = new QStandardItem;
@@ -66,4 +68,4 @@ void LocationModel::addToMap(QQuickView &view) {
         }
 
     }
-}
+//}

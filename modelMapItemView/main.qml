@@ -42,7 +42,7 @@ Map{
         id: bakeryModel
         delegate:  MapQuickItem {
             id: test_map_point
-            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+            sourceItem: Rectangle { width: 14; height: 14; color: { if (model.amenity === "Bakery") "green"; else if (model.amenity === "Restaurant") "red";} border.width: 2; border.color: "white"; smooth: true; radius: 7;
                 MouseArea {
                     id: mouseArea
                     anchors.fill: parent
@@ -58,7 +58,8 @@ Map{
                 }
             }
             coordinate: {
-                model.coordinate
+                //if(model.amenity == "Bakery")
+                    model.coordinate
             }
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
@@ -66,34 +67,34 @@ Map{
         }
     }
 
-    MapItemView {
-        model: rest_model
-        delegate:  MapQuickItem {
-            id: restModel
-            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: { parent.color = 'purple' }
-                    onExited: {parent.color = model.color }
-                    onClicked: {
-                        info_bar.locationTitle = model.name
-                        info_bar.locationWebsite = model.website
-                        info_bar.expanded = true
-                    }
+//    MapItemView {
+//        model: rest_model
+//        delegate:  MapQuickItem {
+//            id: restModel
+//            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+//                MouseArea {
+//                    anchors.fill: parent
+//                    hoverEnabled: true
+//                    onEntered: { parent.color = 'purple' }
+//                    onExited: {parent.color = model.color }
+//                    onClicked: {
+//                        info_bar.locationTitle = model.name
+//                        info_bar.locationWebsite = model.website
+//                        info_bar.expanded = true
+//                    }
 
-                }
-            }
+//                }
+//            }
 
-            coordinate: {
-                model.coordinate
-            }
+//            coordinate: {
+//                model.coordinate
+//            }
 
-            opacity: 1.0
-            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
+//            opacity: 1.0
+//            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
 
-        }
-    }
+//        }
+//    }
     //visualize access through a slider
     MapItemView{
         ComboBox {
@@ -116,7 +117,8 @@ Map{
             onCurrentIndexChanged: {
 
                 emptyRadii.amenity = amItems.get(currentIndex).text
-                //console.log(emptyRadii.amenity)s
+                console.log(emptyRadii.amenity)
+
 
             }
 
@@ -133,14 +135,15 @@ Map{
             value: 14
             onMoved: {
                 emptyRadii.width = value
+               // console.log(value)
 
             }
         }
         model: emptyRadii
         delegate:  MapQuickItem {
             id: empty_points
-            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width; color: "purple";
-                border.width: 2; border.color: "purple"; opacity: 0.5 ; radius: 0.5*width;
+            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width; color: {if (emptyRadii.amenity === "Bakery")"purple";}
+                border.width: 2; border.color: "purple"; opacity: 0.5; radius: 0.5*width; //if (model.amenity === emptyRadii.amenity) 0.5; else 0
                 MouseArea {
                     id : expandingRadii
                     anchors.fill: parent
