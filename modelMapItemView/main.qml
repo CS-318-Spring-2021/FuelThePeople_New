@@ -103,6 +103,7 @@ Map{
 
             model: ListModel {
                 id: amItems
+                ListElement { text: "Visualize Access" }
                 ListElement { text: "Bakery" }
                 ListElement { text: "Restaurant" }
 
@@ -125,8 +126,11 @@ Map{
         model: emptyRadii
         delegate:  MapQuickItem {
             sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width;
-                color: { if (visualizeAccess.currentIndex === 0 && model.amenity === "Bakery") "purple"; else if (visualizeAccess.currentIndex === 1 && model.amenity === "Restaurant") "orange";}
-                border.width: 2; border.color: "purple"; opacity: 0.5; radius: 0.5*width; //if (model.amenity === emptyRadii.amenity) 0.5; else 0
+                color: { if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") "purple"; else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") "purple";}
+                border.width: 2;
+                border.color: { if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") "purple"; else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") "purple";}
+                opacity: { if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") 0.5; else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") 0.5; else 0;}
+                radius: 0.5*width;
                 MouseArea {
                     id : expandingRadii
                     anchors.fill: parent
@@ -135,6 +139,7 @@ Map{
             }
             coordinate: {
                 model.coordinate
+                //if (visualizeAccess.currentIndex === 0 && model.amenity === "Bakery") model.coordinate; else if (visualizeAccess.currentIndex === 1 && model.amenity === "Restaurant") model.coordinate;
             }
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
