@@ -1,4 +1,5 @@
 QT += quick
+QT += network
 
 CONFIG += c++11
 
@@ -8,6 +9,8 @@ CONFIG += c++11
 
 SOURCES += \
     LocationModel.cpp \
+    locationrecord.cpp\
+    filedownloader.cpp\
         main.cpp \
 
 RESOURCES += qml.qrc
@@ -31,3 +34,5 @@ DISTFILES += \
 
 HEADERS += \
     LocationModel.h
+    locationrecord.h
+    filedownloader.h
