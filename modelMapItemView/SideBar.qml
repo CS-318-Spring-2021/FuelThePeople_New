@@ -91,6 +91,7 @@ Row {
         id: info_container
         height: parent.height
         width: parent.parent.width * 0.3
+        radius: 3
         visible: sideBarToggler.checked
         // color: Qt.rgba( 0, 191 / 255.0, 255 / 255.0, 0.07)
         // the above color is if we want slightly transparent, green background

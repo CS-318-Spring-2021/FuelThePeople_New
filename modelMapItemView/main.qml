@@ -29,12 +29,35 @@ Map{
         }
     }
 
+    Rectangle {
+        id: zoomSliderLabelRect;
+        implicitWidth: 60
+        implicitHeight: 25
+        border.color: "#26282a"
+        border.width: 1
+        opacity: 0.75
+        radius: 4
+        anchors.margins: 10
+        anchors.bottomMargin: zoomSlider.height + 16
+        anchors.bottom: parent.bottom
+        anchors.top: scale.top
+        anchors.right: parent.right
+        Label {
+            id: zoomSliderLabel;
+            text: "Zoom";
+            font.pixelSize: 14;
+            anchors.fill: parent
+            horizontalAlignment: Label.AlignHCenter
+            verticalAlignment: Label.AlignVCenter
+        }
+   }
+
     Slider {
         id: zoomSlider;
         z: map_map.z + 3
         to: map_map.maximumZoomLevel;
         from: map_map.minimumZoomLevel;
-        anchors.margins: 10
+        anchors.margins: 18
         anchors.bottom: parent.bottom
         anchors.top: scale.top
         anchors.right: parent.right
@@ -120,7 +143,10 @@ Map{
         ComboBox {
             id: visualizeAccess
             currentIndex: 0
-
+            width: 200
+            anchors.topMargin: 39
+            anchors.top: parent.top;
+            anchors.right: parent.right;
             model: ListModel {
                 id: amItems
                 ListElement { text: "Visualize Access" }
@@ -128,22 +154,52 @@ Map{
                 ListElement { text: "Restaurant" }
 
             }
-            width: 200
+            background: Rectangle {
+                        implicitWidth: 100
+                        implicitHeight: 40
+                        border.color: "#26282a"
+                        border.width: 1
+                        radius: 4
+                        opacity: 0.75
+                    }
 
         }
+
+        Rectangle {
+            id: accessSliderLabelRect;
+            implicitWidth: 146
+            implicitHeight: 25
+            border.color: "#26282a"
+            border.width: 1
+            opacity: 0.75
+            radius: 4
+            anchors.margins: 53;
+            anchors.rightMargin: 72;
+            anchors.bottom: parent.bottom;
+            anchors.right: parent.right
+            Label {
+                id: accessSliderLabel;
+                text: "Adjust access radius";
+                font.pixelSize: 14;
+                anchors.fill: parent
+                horizontalAlignment: Label.AlignHCenter
+                verticalAlignment: Label.AlignVCenter
+            }
+       }
 
         Slider {
             id: accessSlider;
             to: 100;
             from: 5;
-            anchors.margins: 10
+            anchors.margins: 18
             anchors.rightMargin: 50
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            orientation : Qt.Vertical
+            orientation : Qt.Horizontal
             value: 5
 
         }
+
         model: emptyRadii
         delegate:  MapQuickItem {
 
@@ -181,7 +237,7 @@ Map{
                 model.coordinate
                 //if (visualizeAccess.currentIndex === 0 && model.amenity === "Bakery") model.coordinate; else if (visualizeAccess.currentIndex === 1 && model.amenity === "Restaurant") model.coordinate;
             }
-            opacity: 1.0
+            opacity: 0.75
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
         }
 
@@ -215,7 +271,6 @@ Map{
             if (location.length > 0)
                 map_map.changeLocation(location);
         }
-
     }
 
     //display current location
@@ -250,8 +305,16 @@ Map{
         id: locationButton
         text: "Go to current location"
         anchors.horizontalCenter: parent.horizontalCenter
-        onClicked:
-            map_map.changeLocation(getLocation.position.coordinate)
+        onClicked: map_map.changeLocation(getLocation.position.coordinate)
+        background: Rectangle {
+                    implicitWidth: 100
+                    implicitHeight: 40
+                    color: button.down ? "#d6d6d6" : "#f6f6f6"
+                    border.color: "#26282a"
+                    border.width: 1
+                    radius: 4
+                    opacity: 0.75
+                }
     }
 
 }

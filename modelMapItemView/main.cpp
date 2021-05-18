@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     view.resize(1000, 650);
     view.show();
 
-    char csvFilePath[] = "/Users/simonmscharf/Downloads/csvTest.csv";
+    char csvFilePath[] = "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv";
 
     //creates points for bakeries
     LocationModel bakeryModel("bakery_model", csvFilePath, Qt::red);
