@@ -21,6 +21,14 @@ Map{
         geocodeModel.update()
     }
 
+    //this mouse area allows users to click on map outside of circles to exit sideBar
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            info_bar.expanded = false;
+        }
+    }
+
     Slider {
         id: zoomSlider;
         z: map_map.z + 3
@@ -42,7 +50,19 @@ Map{
         id: bakeryModel
         delegate:  MapQuickItem {
             id: test_map_point
-            sourceItem: Rectangle { width: 14; height: 14; color: { if (model.amenity === "Bakery") "green"; else if (model.amenity === "Restaurant") "red";} border.width: 2; border.color: "white"; smooth: true; radius: 7;
+
+            sourceItem: Rectangle {
+                width: 14; height: 14;
+                color: {
+                    if (model.amenity === "Bakery") return "green";
+                    else if (model.amenity === "Restaurant") return "red";
+                    else return "blue"
+                }
+                border.width: 2;
+                border.color: "white";
+                smooth: true;
+                radius: 7;
+
                 MouseArea {
                     id: mouseArea
                     anchors.fill: parent
@@ -114,26 +134,46 @@ Map{
 
         Slider {
             id: accessSlider;
-            to: 80;
-            from: 14;
-            anchors.margins: 30
+            to: 100;
+            from: 5;
+            anchors.margins: 10
+            anchors.rightMargin: 50
             anchors.bottom: parent.bottom
             anchors.right: parent.right
-            orientation : Qt.Horizontal
-            value: 14
+            orientation : Qt.Vertical
+            value: 5
 
         }
         model: emptyRadii
         delegate:  MapQuickItem {
+
+            zoomLevel: 10
             sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width;
-                color: { if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") "purple"; else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") "purple";}
+                color: {
+                    if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") "purple";
+                    else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") return "purple";
+                    else return "green";
+                }
                 border.width: 2;
-                border.color: { if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") "purple"; else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") "purple";}
-                opacity: { if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") 0.5; else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") 0.5; else 0;}
+                border.color: {
+                    if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") return "purple";
+                    else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") return "purple";
+                    else return "green";
+                }
+                opacity: {
+                    if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") return 0.5;
+                    else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") return 0.5;
+                    else return 0;
+                }
                 radius: 0.5*width;
                 MouseArea {
                     id : expandingRadii
                     anchors.fill: parent
+                    onClicked: {
+                        info_bar.locationTitle = model.name
+                        info_bar.locationWebsite = model.website
+                        info_bar.expanded = true
+                    }
                 }
 
             }
