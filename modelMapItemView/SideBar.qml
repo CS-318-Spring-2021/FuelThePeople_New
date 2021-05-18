@@ -28,6 +28,7 @@ Row {
 
 
 
+
     // This is the arrow to close and open window
     Button {
         id: sideBarToggler
@@ -94,7 +95,13 @@ Row {
         // color: Qt.rgba( 0, 191 / 255.0, 255 / 255.0, 0.07)
         // the above color is if we want slightly transparent, green background
         color: "white"
-
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                expanded = true;
+                console.log("sidebar was clicked on")
+            }
+        }
         Column {
             id: informationColumn
             height: parent.height
@@ -131,17 +138,6 @@ Row {
                 }
             }
 
-            Row {
-                id: nameRow
-                spacing: 10
-                topPadding: 20
-                leftPadding: 30
-                Text {
-                    id: name
-                    font.pointSize: fontSize
-                    text: locationTitle
-                }
-            }
 
             Row {
                 id: descriptionRow

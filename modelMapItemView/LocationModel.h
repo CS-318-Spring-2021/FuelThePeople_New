@@ -12,7 +12,7 @@ class LocationModel : public QStandardItemModel
   QML_ELEMENT
 
 private:
-    QString modelName, filePath, amenityType;
+    QString modelName, filePath;
     QColor color;
 
 public:
@@ -21,9 +21,10 @@ public:
        CoordinateRole = Qt::UserRole + 1000,
        ColorRole,
        NameRole,
-       WebsiteRole
+       WebsiteRole,
+       AmenityRole
     };
-    LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color);
+    LocationModel(QString _modelName, QString _filePath, QColor _color);
     void addToMap(QQuickView &view);
 
 };

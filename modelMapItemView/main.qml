@@ -3,6 +3,7 @@ import QtPositioning 5.14
 import QtLocation 5.14
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.15 // or import Qt.labs.controls 1.0
+import QtQuick.Controls.Styles 1.4
 
 Map{
     id: map_map
@@ -18,6 +19,14 @@ Map{
     function changeLocation(text) {
         geocodeModel.query = text
         geocodeModel.update()
+    }
+
+    //this mouse area allows users to click on map outside of circles to exit sideBar
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            info_bar.expanded = false;
+        }
     }
 
     Slider {
@@ -41,7 +50,19 @@ Map{
         id: bakeryModel
         delegate:  MapQuickItem {
             id: test_map_point
-            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+
+            sourceItem: Rectangle {
+                width: 14; height: 14;
+                color: {
+                    if (model.amenity === "Bakery") return "green";
+                    else if (model.amenity === "Restaurant") return "red";
+                    else return "blue"
+                }
+                border.width: 2;
+                border.color: "white";
+                smooth: true;
+                radius: 7;
+
                 MouseArea {
                     id: mouseArea
                     anchors.fill: parent
@@ -57,7 +78,8 @@ Map{
                 }
             }
             coordinate: {
-                model.coordinate
+                //if(model.amenity == "Bakery")
+                    model.coordinate
             }
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
@@ -65,66 +87,104 @@ Map{
         }
     }
 
-    MapItemView {
-        model: rest_model
+//    MapItemView {
+//        model: rest_model
+//        delegate:  MapQuickItem {
+//            id: restModel
+//            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+//                MouseArea {
+//                    anchors.fill: parent
+//                    hoverEnabled: true
+//                    onEntered: { parent.color = 'purple' }
+//                    onExited: {parent.color = model.color }
+//                    onClicked: {
+//                        info_bar.locationTitle = model.name
+//                        info_bar.locationWebsite = model.website
+//                        info_bar.expanded = true
+//                    }
+
+//                }
+//            }
+
+//            coordinate: {
+//                model.coordinate
+//            }
+
+//            opacity: 1.0
+//            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
+
+//        }
+//    }
+    //visualize access through a slider
+    MapItemView{
+        ComboBox {
+            id: visualizeAccess
+            currentIndex: 0
+
+            model: ListModel {
+                id: amItems
+                ListElement { text: "Visualize Access" }
+                ListElement { text: "Bakery" }
+                ListElement { text: "Restaurant" }
+
+            }
+            width: 200
+
+        }
+
+        Slider {
+            id: accessSlider;
+            to: 100;
+            from: 5;
+            anchors.margins: 10
+            anchors.rightMargin: 50
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            orientation : Qt.Vertical
+            value: 5
+
+        }
+        model: emptyRadii
         delegate:  MapQuickItem {
-            id: restModel
-            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+
+            zoomLevel: 10
+            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width;
+                color: {
+                    if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") "purple";
+                    else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") return "purple";
+                    else return "green";
+                }
+                border.width: 2;
+                border.color: {
+                    if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") return "purple";
+                    else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") return "purple";
+                    else return "green";
+                }
+                opacity: {
+                    if (visualizeAccess.currentIndex === 1 && model.amenity === "Bakery") return 0.5;
+                    else if (visualizeAccess.currentIndex === 2 && model.amenity === "Restaurant") return 0.5;
+                    else return 0;
+                }
+                radius: 0.5*width;
                 MouseArea {
+                    id : expandingRadii
                     anchors.fill: parent
-                    hoverEnabled: true
-                    onEntered: { parent.color = 'purple' }
-                    onExited: {parent.color = model.color }
                     onClicked: {
                         info_bar.locationTitle = model.name
                         info_bar.locationWebsite = model.website
                         info_bar.expanded = true
                     }
-
-                }
-            }
-
-            coordinate: {
-                model.coordinate
-            }
-
-            opacity: 1.0
-            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
-
-        }
-    }
-    //visualize access through a slider
-    MapItemView{
-        Slider {
-            id: accessSlider;
-            to: 80;
-            from: 14;
-            anchors.margins: 10
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            orientation : Qt.Horizontal
-            value: 14
-            onMoved: {
-                emptyRadii.width = value
-            }
-        }
-        model: emptyRadii
-        delegate:  MapQuickItem {
-            id: empty_points
-            sourceItem: Rectangle { id: emptyPoints; width: accessSlider.value; height: width; color: "purple";
-                border.width: 2; border.color: "purple"; opacity: 0.5 ; radius: 0.5*width;
-                MouseArea {
-                    id : expandingRadii
-                    anchors.fill: parent
                 }
 
             }
             coordinate: {
                 model.coordinate
+                //if (visualizeAccess.currentIndex === 0 && model.amenity === "Bakery") model.coordinate; else if (visualizeAccess.currentIndex === 1 && model.amenity === "Restaurant") model.coordinate;
             }
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
         }
+
     }
 
     SideBar {

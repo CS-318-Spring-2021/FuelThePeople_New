@@ -18,16 +18,18 @@ int main(int argc, char *argv[])
     view.resize(1000, 650);
     view.show();
 
+    char csvFilePath[] = "/Users/simonmscharf/Downloads/csvTest.csv";
+
     //creates points for bakeries
-    LocationModel bakeryModel("bakery_model", "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv", "Bakery", Qt::red);
+    LocationModel bakeryModel("bakery_model", csvFilePath, Qt::red);
     bakeryModel.addToMap(view);
 
     //creates points for restaurants
-    LocationModel restModel("rest_model", "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv", "Restaurant", Qt::green);
+    LocationModel restModel("rest_model", csvFilePath, Qt::green);
     restModel.addToMap(view);
 
     //creates empty points to visualize access
-    LocationModel expandingRadii("emptyRadii", "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv", "Restaurant", Qt::green);
+    LocationModel expandingRadii("emptyRadii", csvFilePath, Qt::green);
     expandingRadii.addToMap(view);
 
     return app.exec();
