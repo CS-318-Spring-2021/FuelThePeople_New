@@ -75,6 +75,7 @@ Map{
             id: test_map_point
 
             sourceItem: Rectangle {
+
                 width: 14; height: 14;
                 color: {
                     if (model.amenity === "Bakery") return "green";
@@ -91,7 +92,7 @@ Map{
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
-                    onExited: {parent.color = model.color }
+                    onExited: {parent.color = (model.amenity === "Bakery") ? "green" : "red"}
                     onClicked: {
                         info_bar.locationTitle = model.name
                         info_bar.locationWebsite = model.website
