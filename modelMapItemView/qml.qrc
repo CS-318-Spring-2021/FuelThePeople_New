@@ -1,10 +1,6 @@
 <RCC>
     <qresource prefix="/">
-<<<<<<< HEAD
 	<file>location_icon.png</file>
-=======
-        <file>location_icon.png</file>
->>>>>>> origin/importModelClass
         <file>main.qml</file>
         <file>SearchBar.qml</file>
         <file>SideBar.qml</file>
