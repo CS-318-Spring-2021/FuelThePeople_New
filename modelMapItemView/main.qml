@@ -73,7 +73,6 @@ Map{
         id: bakeryModel
         delegate:  MapQuickItem {
             id: test_map_point
-
             sourceItem: Rectangle {
 
                 width: 14; height: 14;
@@ -86,9 +85,36 @@ Map{
                 border.color: "white";
                 smooth: true;
                 radius: 7;
-
                 MouseArea {
                     id: mouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: { parent.color = 'purple' }
+                    onExited: {parent.color = model.color }
+                    onClicked: {
+                        info_bar.locationTitle = model.name
+                        info_bar.locationWebsite = model.website
+                        info_bar.expanded = true
+                    }
+
+                }
+            }
+            coordinate: {
+                    model.coordinate
+            }
+            opacity: 1.0
+            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
+
+        }
+    }
+
+    MapItemView {
+        model: allPoint_model
+        delegate:  MapQuickItem {
+            id: allPoint
+            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
+                MouseArea {
+                    id: otherMouseArea
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
@@ -101,44 +127,17 @@ Map{
 
                 }
             }
+
             coordinate: {
-                //if(model.amenity == "Bakery")
                     model.coordinate
             }
+
             opacity: 1.0
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
 
         }
     }
 
-//    MapItemView {
-//        model: rest_model
-//        delegate:  MapQuickItem {
-//            id: restModel
-//            sourceItem: Rectangle { width: 14; height: 14; color: model.color; border.width: 2; border.color: "white"; smooth: true; radius: 7;
-//                MouseArea {
-//                    anchors.fill: parent
-//                    hoverEnabled: true
-//                    onEntered: { parent.color = 'purple' }
-//                    onExited: {parent.color = model.color }
-//                    onClicked: {
-//                        info_bar.locationTitle = model.name
-//                        info_bar.locationWebsite = model.website
-//                        info_bar.expanded = true
-//                    }
-
-//                }
-//            }
-
-//            coordinate: {
-//                model.coordinate
-//            }
-
-//            opacity: 1.0
-//            anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)
-
-//        }
-//    }
     //visualize access through a slider
     MapItemView{
         ComboBox {
@@ -236,7 +235,6 @@ Map{
             }
             coordinate: {
                 model.coordinate
-                //if (visualizeAccess.currentIndex === 0 && model.amenity === "Bakery") model.coordinate; else if (visualizeAccess.currentIndex === 1 && model.amenity === "Restaurant") model.coordinate;
             }
             opacity: 0.75
             anchorPoint: Qt.point(sourceItem.width/2, sourceItem.height/2)

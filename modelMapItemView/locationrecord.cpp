@@ -52,15 +52,3 @@ QVariant LocationRecord::getVal(QString label){
 
 
 }
-
-// LocationRecord:: combineAddress(QString label, QString value){
-//    if(compare(label,"name"){
-
-//            return true;
-//    }
-//    return false;
-//}
-
-
-
-

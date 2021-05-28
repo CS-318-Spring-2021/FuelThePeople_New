@@ -4,6 +4,7 @@
 #include <QGeoCoordinate>
 #include <QQmlContext>
 #include <QStandardItemModel>
+#include <QDir>
 #include "LocationModel.h"
 
 int main(int argc, char *argv[])
@@ -18,19 +19,25 @@ int main(int argc, char *argv[])
     view.resize(1000, 650);
     view.show();
 
-    char csvFilePath[] = "/Users/jacksonchen/Desktop/CS 318 GUI:OOP Application Dev/FuelThePeople_New/csvTest.csv";
+    // Please change csvFilePath to where the CSV is held at
+    char csvFilePath[] = "/Users/jacksonchen/Downloads/modelMapItemView/csvTest.csv";
+    char apiLink[] = "https://api.reach4help.org/edge/map/data";
 
     //creates points for bakeries
     LocationModel bakeryModel("bakery_model", csvFilePath, Qt::red);
     bakeryModel.addToMap(view);
 
     //creates points for restaurants
-    LocationModel restModel("rest_model", csvFilePath, Qt::green);
+    LocationModel restModel("rest_model", csvFilePath, Qt::darkGreen);
     restModel.addToMap(view);
 
+    //creates points for JSON locations
+    LocationModel allPoint_model("allPoint_model", apiLink, Qt::cyan);
+    allPoint_model.addToMap(view);
+
     //creates empty points to visualize access
-    LocationModel expandingRadii("emptyRadii", csvFilePath, Qt::green);
-    expandingRadii.addToMap(view);
+     LocationModel expandingRadii("emptyRadii", csvFilePath, Qt::green);
+     expandingRadii.addToMap(view);
 
     return app.exec();
 }
