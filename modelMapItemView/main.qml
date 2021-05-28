@@ -90,7 +90,7 @@ Map{
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
-                    onExited: {parent.color = model.color }
+                    onExited: {parent.color = (model.amenity === "Bakery") ? "green" : "red"}
                     onClicked: {
                         info_bar.locationTitle = model.name
                         info_bar.locationWebsite = model.website
@@ -118,11 +118,11 @@ Map{
                     anchors.fill: parent
                     hoverEnabled: true
                     onEntered: { parent.color = 'purple' }
-                    onExited: {parent.color = (model.amenity === "Bakery") ? "green" : "red"}
+                    onExited: {parent.color = model.color}
                     onClicked: {
+                        info_bar.expanded = true
                         info_bar.locationTitle = model.name
                         info_bar.locationWebsite = model.website
-                        info_bar.expanded = true
                     }
 
                 }
