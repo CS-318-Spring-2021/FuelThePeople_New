@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+	<file>location_icon.png</file>
         <file>main.qml</file>
         <file>SearchBar.qml</file>
         <file>SideBar.qml</file>

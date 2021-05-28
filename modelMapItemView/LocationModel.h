@@ -17,11 +17,12 @@ class LocationModel : public QStandardItemModel
   QML_ELEMENT
 
 private:
-    QString modelName, filePath, amenityType;
+    QString modelName, filePath;
     QColor color;
 
 
 public:
+    //enumerate roles to communicate between the model and QML
     enum {
         CoordinateRole = Qt::UserRole + 1000,
         ColorRole,
@@ -33,6 +34,7 @@ public:
     FileDownloader *newFile;
     std::map<QUrl, FileDownloader> files;
     LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color);
+
     void addToMap(QQuickView &view);
     void importCSV();
     void importJSon();

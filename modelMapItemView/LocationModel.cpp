@@ -15,8 +15,9 @@
 
 
 
-LocationModel::LocationModel(QString _modelName, QString _filePath, QString _amenityType, QColor _color) :
-    modelName(_modelName), filePath(_filePath), amenityType(_amenityType), color(_color)
+
+LocationModel::LocationModel(QString _modelName, QString _filePath, QColor _color) :
+    modelName(_modelName), filePath(_filePath), color(_color)
 { }
 
 //populates map with points with attributes according to the model and the enumerated roles
@@ -43,6 +44,7 @@ void LocationModel::addToMap(QQuickView &view) {
 
 void LocationModel::importCSV(){
 #if 1
+
     QString data;
     QFile importedCSV(filePath);
     QStringList rowOfData;
@@ -185,3 +187,4 @@ void LocationModel::processData(){
     //        qDebug()<<"\n We Made It \n";
 
     //        records.insert(records.end(),record);
+
