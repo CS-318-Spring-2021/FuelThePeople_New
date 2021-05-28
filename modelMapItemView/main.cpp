@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     view.show();
 
     // Please build this project in .../FuelThePeople_New/modelMapItemView/ if the application is not reading it in.
-    char csvFilePath[] = "csvTest.csv";
+    char csvFilePath[] = ":/csvTest.csv";
     char apiLink[] = "https://api.reach4help.org/edge/map/data";
 
     //creates points for bakeries
